@@ -57,7 +57,7 @@ const[menu, setMenu]=useState(false)
     if (!user?.uid) {
       setIncome([]);
       setExpense([]);
-      return;w
+      return;
     }
 
     const incomeRef = collection(db, "users", user.uid, "income");
