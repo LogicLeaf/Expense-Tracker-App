@@ -1,11 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 import { NavLink} from "react-router-dom";
-import {useState, useEffect} from 'react'
+import {useState, useEffect,useContext} from 'react'
 import userIcon from '../Assets/user-solid.svg'
 import { auth, db } from '../components/firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import {UserContext} from "../context/UserContext"
+ 
 
 const SideBarWrap=styled.div`
  width:20%;
@@ -174,7 +176,11 @@ const LogOut=styled.div`
     color: white;
   }
 `
-export default function SideBar({handleLogout, menu}) {
+export default function SideBar() {
+  const{
+    menu,
+    handleLogout
+  }=useContext(UserContext)
 const[currPic,newPic]=useState(userIcon)
 const[nameClick,clickUpdate]=useState()
 const[name, setName]=useState("Change name")
@@ -247,7 +253,6 @@ const handleBlur = async () => {
 
 // }
 // }
-console.log(menu)
   return (
    
            <SideBarWrap $menu={menu}>

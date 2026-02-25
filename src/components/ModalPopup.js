@@ -1,7 +1,8 @@
-import React, {useState} from 'react'
+import React from 'react'
+import { useContext } from 'react'
 import styled from 'styled-components'
 import TransactionForm from './TransactionForm'
-
+import { UserContext } from '../context/UserContext'
 const ModalWrapper=styled.div`
 position:fixed;
 top:0;
@@ -44,8 +45,12 @@ width: 80vw;
   }
 `
 
-export default function ModalPopup({addIncome,addExpense,formOpen,setFormOpen,income,setIncome,expense,setExpense,amount,setAmount,description,setDescription}) {
-  const[showPicker,setPicker]=useState(false)
+export default function ModalPopup() {
+ const{
+  formOpen,
+    setFormOpen,
+  }=useContext(UserContext)
+ 
         const ModalQuit=()=>{   
           setFormOpen(!formOpen)
          
@@ -61,14 +66,7 @@ export default function ModalPopup({addIncome,addExpense,formOpen,setFormOpen,in
     <div>
         <ModalWrapper  $show={formOpen} onClick={ModalQuit}>
         <ModalBox      $show={formOpen} onClick={ModelBoxFix}>
-        <TransactionForm showPicker={showPicker} setPicker={setPicker}
-                                 income={income} setIncome={setIncome}
-         expense={expense} setExpense={setExpense} 
-         description={description} setDescription={setDescription} 
-         amount={amount} setAmount={setAmount}
-         formOpen={formOpen} setFormOpen={setFormOpen}
-         addIncome={addIncome}
-         addExpense={addExpense}/>
+        <TransactionForm />
                 
                 </ModalBox>
       </ModalWrapper>

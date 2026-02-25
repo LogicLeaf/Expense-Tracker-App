@@ -1,9 +1,9 @@
 import React from 'react'
 import EmojiPick from '../components/EmojiPick';
 import styled from 'styled-components';
-import {useState} from 'react'
 import toast from 'react-hot-toast';
-
+import {UserContext} from "../context/UserContext"
+import { useContext } from 'react';
 const FormStyle=styled.div`
 width: 100%;
 height:auto;
@@ -70,9 +70,21 @@ option{
 outline:1px solid #e0e0e0ff;}
 `
 
-export default function TransactionForm({addIncome,addExpense,showPicker,setPicker,formOpen,setFormOpen,income,setIncome,expense,setExpense,amount,setAmount,description,setDescription}) {
-const[currEmoji,setEmoji]=useState("😊")
-
+export default function TransactionForm() {
+const{
+   formOpen,
+    setFormOpen,
+    amount,
+    setAmount,
+    description,
+    setDescription,
+    showPicker,
+    setPicker,
+    currEmoji,
+    addIncome,
+    addExpense,
+    setEmoji
+}=useContext(UserContext)
 const cancelBtn=()=>{  
 setFormOpen(!formOpen)
         }
