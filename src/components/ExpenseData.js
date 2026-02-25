@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import {useState} from 'react'
+import {useState,useContext} from 'react'
+import { UserContext } from '../context/UserContext'
 import PopUp from './PopUp'
 const ItemsWrapper=styled.div`
 display:flex;
@@ -106,11 +107,15 @@ margin-right:20px;
 }
 `
 
-export default function ExpenseData({expense, setExpense, deleteExpense}) {
+export default function ExpenseData() {
   //  const deleteHandle=(index)=>{
   //  setExpense(prev => prev.filter((_, i) => i !== index))
   
   //  }
+
+  const{
+  expense, deleteExpense
+  }=useContext(UserContext)
 const[submit,setsubmit]=useState(null)
 const[ShowPopUp,setPopUp]=useState(false)
 const[pendingId,setpendingId]=useState(false)

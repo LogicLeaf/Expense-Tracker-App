@@ -1,10 +1,11 @@
 import React from 'react'
-import {useState} from 'react'
+import {useContext} from 'react'
 import {getAuth,signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup} from "firebase/auth"
 import{app} from "../components/firebase";
 import styled from 'styled-components';
 import { FcGoogle } from "react-icons/fc";
 import BannerDefault from "../Assets/Banner_Default.jpg";
+import { UserContext } from '../context/UserContext';
 
 const MainWrapper=styled.div`
 display:flex;
@@ -171,12 +172,20 @@ const SignInGroup=styled.div`
 const SignUpGroup=styled.div`
 `
 export default function RegistrationPage() {
-const[email,setEmail]=useState("")
-const[password,setPassword]=useState("")
-const[checkReg,setCheckReg]=useState(true)
-const [errorMsg, setErrorMsg] = useState(""); // for showing errors
-const[loading,setLoading]=useState(false)
 
+const{
+email,
+checkReg,
+errorMsg,
+password,
+setPassword,
+setErrorMsg,
+setEmail,
+setLoading,
+setCheckReg,
+loading
+
+}=useContext(UserContext)
 const auth=getAuth(app)
 
 // --- Firebase Google Sign-In ---

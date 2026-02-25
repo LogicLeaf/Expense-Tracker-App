@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import PopUp from './PopUp'
-import {useState} from 'react'
-
+import {useState,useContext} from 'react'
+import { UserContext } from '../context/UserContext'
 const ItemsWrapper=styled.div`
 display:flex;
 align-items:center;
@@ -113,10 +113,13 @@ margin-right:20px;
 `
 
 
-export default function IncomeData({income= [], setIncome, deleteIncome}) {
+export default function IncomeData() {
 //  const deleteHandle=(index)=>{
 //    setIncome(prev => prev.filter((_, i) => i !== index))
 //    }
+const{
+  income, deleteIncome
+}=useContext(UserContext)
 const[submit,setsubmit]=useState(null)
 const[ShowPopUp,setPopUp]=useState(false)
 const[pendingId,setpendingId]=useState(false)

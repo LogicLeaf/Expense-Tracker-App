@@ -1,6 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import ModalPopup from './ModalPopup'
+import {UserContext} from "../context/UserContext"
+import { useContext } from 'react';
+
 const OuterDiv=styled.div`
 padding:0 20px;
 width:100%;
@@ -89,7 +92,11 @@ display:flex;
 display:none;
 }
 `
-export default function NavBar({setMenu,menu,addIncome,addExpense,setFormOpen,formOpen,income,setIncome,expense,setExpense,amount,setAmount,description,setDescription}) {
+export default function NavBar() {
+  const{
+     setMenu,menu,setFormOpen,formOpen
+  }=useContext(UserContext)
+  
   const showForm=()=>{
   setFormOpen(!formOpen)
 }
@@ -98,7 +105,7 @@ setMenu(!menu)
 
 }
   return (
-    <div>
+    <>
       <OuterDiv>
         <IconManage>{menu?(<Cross onClick={hamburgHandle}><i className="fa-solid fa-xmark"></i></Cross>):
         (<Hamburger onClick={hamburgHandle}>
@@ -108,17 +115,10 @@ setMenu(!menu)
         
       <Heading>Expense tracker app</Heading>
       <ShowModal  onClick={showForm}><Text>Add Items</Text>
-        <ModalPopup income={income} setIncome={setIncome}
-         expense={expense} setExpense={setExpense} 
-         description={description} setDescription={setDescription} 
-         amount={amount} setAmount={setAmount}
-         formOpen={formOpen} setFormOpen={setFormOpen}
-         addIncome={addIncome}
-         addExpense={addExpense}
-        />
+        <ModalPopup/>
       </ShowModal>
       </OuterDiv>
        
-    </div>
+    </>
   )
 }

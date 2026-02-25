@@ -29,30 +29,18 @@ width:100%;
 flex-direction:column;
 }
 `
-export default function Layout({setMenu,menu,addIncome,addExpense, handleLogout,children,setFormOpen,formOpen,income,setIncome,expense,setExpense,amount,setAmount,description,setDescription}) {
+export default function Layout({children}) {
   return (
     <div>
       <LayOutWrap>
-      <NavBar income={income} setIncome={setIncome}
-         expense={expense} setExpense={setExpense} 
-         description={description} setDescription={setDescription} 
-         amount={amount} setAmount={setAmount}
-         formOpen={formOpen} setFormOpen={setFormOpen}
-         addIncome={addIncome}
-         addExpense={addExpense}
-         setMenu={setMenu} menu={menu}
-          />
+      <NavBar/>
       <LowerWrapper>
-        <SideBar handleLogout={handleLogout} menu={menu}/>
+        <SideBar/>
       <PageContent>
         {children}
       </PageContent>
-      
       </LowerWrapper>
-      
-
       </LayOutWrap>
-      
     </div>
   )
 }

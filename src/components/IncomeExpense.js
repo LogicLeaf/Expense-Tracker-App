@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-
+import { useContext } from 'react'
+import { UserContext } from '../context/UserContext'
 const OuterDiv=styled.div`
 display:flex;
 width:100%;
@@ -71,7 +72,11 @@ font-size:0.9rem;
 const IconDiv=styled.div`
 width:40%;
 `
-export default function IncomeExpense({income, expense}) {
+export default function IncomeExpense() {
+const{
+  income, expense
+}=useContext(UserContext)
+
 
 const incomeTotal=income?.reduce((accumulator,arrayItem)=>{
   const stringToNum=Number(arrayItem.amount)

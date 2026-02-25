@@ -73,15 +73,15 @@ width:90vw;
 }
 `
 
-export default function Dashboard({income,setIncome,expense,setExpense,deleteExpense,deleteIncome}) {
+export default function Dashboard() {
   return (
     <ContentArea>
-    <Summary><IncomeExpense income={income} expense={expense} /></Summary>
+    <Summary><IncomeExpense/></Summary>
         <DivOv>
         <RecentTransaction>
           <Heading>Recent Transactions</Heading>
-            <IncomeData income={income} setIncome={setIncome} deleteIncome={deleteIncome}/>
-            <ExpenseData expense={expense} setExpense={setExpense}  deleteExpense={deleteExpense}/>
+            <IncomeData/>
+            <ExpenseData/>
         </RecentTransaction>
         <OverView>
           <Heading>Overview</Heading>
