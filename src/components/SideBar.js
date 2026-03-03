@@ -186,45 +186,45 @@ const[nameClick,clickUpdate]=useState()
 const[name, setName]=useState("Change name")
 
 //firebase starts here
-const storage = getStorage()
+// const storage = getStorage()
 
   // Load profile on mount
-  useEffect(() => {
-    const loadProfile = async () => {
-      if (!auth.currentUser) return
-      const docRef = doc(db, "users", auth.currentUser.uid)
-      const docSnap = await getDoc(docRef)
-      if (docSnap.exists()) {
-        const data = docSnap.data()
-        if (data.name) setName(data.name)
-        if (data.profileImageUrl) newPic(data.profileImageUrl)
-      }
-    }
-    loadProfile()
-  }, [])
+  // useEffect(() => {
+  //   const loadProfile = async () => {
+  //     if (!auth.currentUser) return
+  //     const docRef = doc(db, "users", auth.currentUser.uid)
+  //     const docSnap = await getDoc(docRef)
+  //     if (docSnap.exists()) {
+  //       const data = docSnap.data()
+  //       if (data.name) setName(data.name)
+  //       if (data.profileImageUrl) newPic(data.profileImageUrl)
+  //     }
+  //   }
+  //   loadProfile()
+  // }, [])
 
   // Change picture
-  const picChange = async (e) => {
-    const file = e.target.files[0]
-    if (!file || !auth.currentUser) return
+  // const picChange = async (e) => {
+  //   const file = e.target.files[0]
+  //   if (!file || !auth.currentUser) return
 
-    const storageRef = ref(storage, `profileImages/${auth.currentUser.uid}/profile.jpg`)
-    await uploadBytes(storageRef, file)
-    const url = await getDownloadURL(storageRef)
-    newPic(url)
+  //   const storageRef = ref(storage, `profileImages/${auth.currentUser.uid}/profile.jpg`)
+  //   await uploadBytes(storageRef, file)
+  //   const url = await getDownloadURL(storageRef)
+  //   newPic(url)
 
-    // Save URL in Firestore
-    await setDoc(doc(db, "users", auth.currentUser.uid), { profileImageUrl: url }, { merge: true })
-  }
+  //   // Save URL in Firestore
+  //   await setDoc(doc(db, "users", auth.currentUser.uid), { profileImageUrl: url }, { merge: true })
+  // }
 
   //firebase ends here
-// const picChange=(e)=>{
-//     const file=e.target.files[0]
-//     if(file){
-//       const newUrl=URL.createObjectURL(file)
-//       newPic(newUrl)
-//     }
-//   }
+const picChange=(e)=>{
+    const file=e.target.files[0]
+    if(file){
+      const newUrl=URL.createObjectURL(file)
+      newPic(newUrl)
+    }
+  }
 
 const nameChanger=(e)=>{
 const nameEvent=e.target.value

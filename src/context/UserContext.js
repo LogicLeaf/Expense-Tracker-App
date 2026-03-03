@@ -39,12 +39,17 @@ const[currEmoji,setEmoji]=useState("😊")
  const[checkReg,setCheckReg]=useState(true)
  const [errorMsg, setErrorMsg] = useState(""); // for showing errors
  const[loading,setLoading]=useState(false)
+ const[submit,setsubmit]=useState(null)
+const[ShowPopUp,setPopUp]=useState(false)
+const[pendingId,setpendingId]=useState(false)
+
  const firebaseActions=useFirebaseSetup(setIncome,setExpense,user)
   return (
     <UserContext.Provider value={{income,setIncome,expense,setExpense,
     amount,setAmount,description,setDescription,formOpen,setFormOpen,user,setUser,menu, setMenu,
     showPicker,setPicker,currEmoji,setEmoji,email,setEmail,password,setPassword,checkReg,setCheckReg,
-    errorMsg, setErrorMsg,loading,setLoading,handleLogout,...firebaseActions}}
+    errorMsg, setErrorMsg,loading,setLoading,handleLogout,...firebaseActions,submit,setsubmit,
+    ShowPopUp,setPopUp,pendingId,setpendingId}}
     >{children}</UserContext.Provider>
   )
 }

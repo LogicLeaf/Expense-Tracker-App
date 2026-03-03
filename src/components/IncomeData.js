@@ -1,14 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import PopUp from './PopUp'
-import {useState,useContext} from 'react'
+import DelPopUp from './DelPopUp'
+import {useContext} from 'react'
 import { UserContext } from '../context/UserContext'
 const ItemsWrapper=styled.div`
 display:flex;
 align-items:center;
 width:100%;
 margin-bottom:30px;
-background-color:blue;
 @media(max-width:600px){
 width:100%;
 }
@@ -54,7 +53,6 @@ align-items:center;
 height:30px;
 width:90px;
 background-color: #e7fff1ff;
-background-color:red;
 border-radius:5px;
 font-family: 'Poppins', sans-serif;
   font-weight: 700;   /* Bold */
@@ -84,7 +82,6 @@ justify-content:space-evenly;
 height:50px;
 width:60%;
 padding-left:20px;
-background-color:red;
 @media(max-width:600px){
 padding-left:7px;
 }
@@ -96,7 +93,6 @@ justify-content:center;
 align-items:center;
 margin-right:40px;
 color: #7b7b7bff;
-background-color:red;
 width:20%;
 &:hover{
 color:black;
@@ -117,23 +113,15 @@ export default function IncomeData() {
 //  const deleteHandle=(index)=>{
 //    setIncome(prev => prev.filter((_, i) => i !== index))
 //    }
-const{
-  income, deleteIncome
-}=useContext(UserContext)
-const[submit,setsubmit]=useState(null)
-const[ShowPopUp,setPopUp]=useState(false)
-const[pendingId,setpendingId]=useState(false)
+  const{
+  income,setPopUp,setpendingId
+  }=useContext(UserContext)
 
 const popUpCheck=(id)=>{
   setpendingId(id)
 setPopUp(true)
 }
-const delConfirm=()=>{
-   if (pendingId) {
-    deleteIncome(pendingId); // now actually delete
-    setpendingId(null);
-  }
-}
+
     const list=income.map((item,index)=>{
         return <ItemsWrapper key={item.id}>
           {/* <ItemsWrapper key={index}>  */}
@@ -151,7 +139,7 @@ const delConfirm=()=>{
 
   return (
     <div>
-      <PopUp ShowPopUp={ShowPopUp} setPopUp={setPopUp} submit={submit} setsubmit={setsubmit} delConfirm={delConfirm} />
+      <DelPopUp/>
       {list}  
     </div>
   )

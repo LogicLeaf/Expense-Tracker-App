@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-
+import {useContext} from 'react'
+import { UserContext } from '../context/UserContext'
 const Buttons=styled.div`
 display:flex;
 justify-content:space-between;
@@ -62,6 +63,7 @@ position:fixed;
 top:0;
 left:0;
 width:100vw;
+
 height:100vh;
 display:flex;
 justify-content:center;
@@ -100,7 +102,17 @@ width: 70vw;
   }
 `
 
-export default function Popup({ShowPopUp,setPopUp,setsubmit,delConfirm}) {
+export default function DelPopUp() {
+const{
+  ShowPopUp,setPopUp,setsubmit,deleteIncome,pendingId,setpendingId
+  }=useContext(UserContext)
+        
+  const delConfirm=()=>{
+   if (pendingId) {
+    deleteIncome(pendingId); // now actually delete
+    setpendingId(null);
+  }
+}  
         const PopUpQuit=()=>{   
           setPopUp(!ShowPopUp)
         }

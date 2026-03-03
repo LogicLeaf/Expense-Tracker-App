@@ -1,7 +1,8 @@
 import React from 'react'
 import EmojiPicker from 'emoji-picker-react';
 import styled from 'styled-components';
-
+import {useContext} from 'react'
+import { UserContext } from '../context/UserContext'
 const PickerButton=styled.div`
 display:flex;
 justify-content:center;
@@ -29,7 +30,10 @@ EmojiPicker{
 background-color:red;
 }
 `
-export default function EmojiPick({showPicker,setPicker,currEmoji,setEmoji}) {
+export default function EmojiPick() {
+const{
+  showPicker,setPicker,currEmoji,setEmoji
+  }=useContext(UserContext)
 
 
 const emojiUpdate=(emojiData)=>{

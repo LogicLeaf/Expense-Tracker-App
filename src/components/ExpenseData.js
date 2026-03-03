@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import {useState,useContext} from 'react'
+import {useContext} from 'react'
 import { UserContext } from '../context/UserContext'
-import PopUp from './PopUp'
+import DelPopUp from './DelPopUp'
 const ItemsWrapper=styled.div`
 display:flex;
 align-items:center;
@@ -94,7 +94,7 @@ justify-content:center;
 align-items:center;
 margin-right:40px;
 color: #7b7b7bff;
-width:5px;
+width:20%;
 &:hover{
 color:black;
 cursor:pointer;
@@ -102,10 +102,13 @@ transform: scale(1.07);
 transition: all 0.3s ease;
 }
  @media(max-width:600px){
+ height:100%;
+ width:20%;
 font-size:0.8rem;
 margin-right:20px;
 }
 `
+
 
 export default function ExpenseData() {
   //  const deleteHandle=(index)=>{
@@ -114,22 +117,15 @@ export default function ExpenseData() {
   //  }
 
   const{
-  expense, deleteExpense
+  expense,setPopUp,setpendingId
   }=useContext(UserContext)
-const[submit,setsubmit]=useState(null)
-const[ShowPopUp,setPopUp]=useState(false)
-const[pendingId,setpendingId]=useState(false)
+
 
 const popUpCheck=(id)=>{
   setpendingId(id)
 setPopUp(true)
 }
-const delConfirm=()=>{
-   if (pendingId) {
-    deleteExpense(pendingId); // now actually delete
-    setpendingId(null);
-  }
-}
+
   const newList=(item,index)=>{
         return <ItemsWrapper key={item.id}>
           {/* <ItemsWrapper key={index}>  */}
@@ -139,7 +135,7 @@ const delConfirm=()=>{
           <Date>{item.date}</Date>
         </DateDesWrapper>
          {/* <DelIcon><i onClick={() =>deleteHandle(index)} className="fa-solid fa-trash-can"></i></DelIcon> */}
-         <DelIcon><i onClick={() =>popUpCheck(item.id)} className="fa-solid fa-trash-can"></i></DelIcon>
+         <DelIcon><i className="fa-solid fa-pen-to-square"></i><i onClick={() =>popUpCheck(item.id)} className="fa-solid fa-trash-can"></i></DelIcon>
           <Amount>- {item.amount} rs{<i className="fa-solid fa-chart-line" ></i>}</Amount>
           </ItemsWrapper>
          
@@ -149,7 +145,7 @@ const delConfirm=()=>{
    
   return (
     <div>
-      <PopUp ShowPopUp={ShowPopUp} setPopUp={setPopUp} submit={submit} setsubmit={setsubmit} delConfirm={delConfirm} />
+      <DelPopUp/>
       {list}  
     </div>
   )
